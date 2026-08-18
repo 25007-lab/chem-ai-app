@@ -4,7 +4,7 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors
-from rdkit.Chem import rdMolDraw2D  # 경로 수정 완료!
+from rdkit.Chem.Draw import rdMolDraw2D  # 정확한 경로 수정 완료
 
 # 1. 저장해둔 모델 불러오기
 model = joblib.load('solubility_model.pkl')
