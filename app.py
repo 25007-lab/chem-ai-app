@@ -6,7 +6,7 @@ from rdkit.Chem import Lipinski
 
 st.set_page_config(page_title="화학 분자 분석 AI", layout="wide")
 
-st.title("🧪 화학 분자 다차원 분석 및 ESOL 예측 시스템")
+st.title("🧪 화학 분자 다차원 분석 및 ESOL 예측 시스템 🧪")
 st.write("분자 구조식(SMILES)을 입력하면 순수 ESOL 수학 모델과 분자 디스크립터를 실시간으로 통합 산출합니다.")
 
 # 사용자 입력창
@@ -43,7 +43,7 @@ if st.button("분석 및 예측하기"):
                 st.image(img_url, caption="분자 구조 이미지", width=350)
 
             with col2:
-                st.subheader("📊 통합 분자 성질 및 용해도 분석")
+                st.subheader("📊 통합 분자 성질 및 용해도 분석 📊")
                 
                 # 모든 지표 한 번에 계산
                 log_s, logp, mw, rb, ap, tpsa = calculate_esol_and_features(mol)
@@ -64,9 +64,9 @@ if st.button("분석 및 예측하기"):
                     
                 # 극성 성향 분석 가이드
                 if tpsa > 60 or logp < 0:
-                    st.info("💡 **분자 성향 분석**: 이 분자는 극성 작용기를 포함하고 있어 상대적으로 **극성** 성향을 띨 가능성이 높습니다.")
+                    st.info("💡 **분자 성향 분석**: 이 분자는 극성 작용기를 포함하고 있어 상대적으로 **극성** 성향을 띨 가능성이 높습니다. 💡")
                 else:
-                    st.info("💡 **분자 성향 분석**: 이 분자는 탄화수소 사슬 등이 우세하여 상대적으로 **비극성** 성향을 띨 가능성이 높습니다.")
+                    st.info("💡 **분자 성향 분석**: 이 분자는 탄화수소 사슬 등이 우세하여 상대적으로 **비극성** 성향을 띨 가능성이 높습니다. 💡")
                         
         else:
             st.error("올바른 SMILES 형식이 아닙니다. 올바른 구조식을 입력해주세요.")
