@@ -3,7 +3,6 @@ import joblib
 import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem import Draw
 
 # 1. 저장해둔 모델 불러오기
 model = joblib.load('solubility_model.pkl')
@@ -18,10 +17,6 @@ if st.button("예측하기"):
     if smiles_input:
         mol = Chem.MolFromSmiles(smiles_input)
         if mol:
-            # 시각화
-            img = Draw.MolToImage(mol)
-            st.image(img, caption="입력하신 분자 구조")
-            
             # 예측을 위한 데이터 변환
             fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024)
             features = np.array(fp).reshape(1, -1)
