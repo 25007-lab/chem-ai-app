@@ -4,7 +4,6 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors
-from rdkit.Chem.Draw import rdMolDraw2D  # 정확한 경로 수정 완료
 
 # 1. 저장해둔 모델 불러오기
 model = joblib.load('solubility_model.pkl')
@@ -17,14 +16,6 @@ st.write("분자 구조식(SMILES)을 입력하면 AI 용해도 예측과 함께
 # 2. 사용자 입력창
 smiles_input = st.text_input("분자식(SMILES)을 입력하세요 (예: CCO, c1ccccc1 등):", "CCO")
 
-# 3. 분자 구조를 그려주는 함수 (SVG 방식)
-def render_mol_svg(mol):
-    drawer = rdMolDraw2D.MolDraw2DSVG(400, 300)
-    drawer.DrawMolecule(mol)
-    drawer.FinishDrawing()
-    svg = drawer.GetDrawingText()
-    return svg.replace('svg:', '')
-
 if st.button("분석 및 예측하기"):
     if smiles_input:
         mol = Chem.MolFromSmiles(smiles_input)
@@ -34,11 +25,9 @@ if st.button("분석 및 예측하기"):
             
             with col1:
                 st.subheader("🔍 입력된 분자 구조")
-                try:
-                    mol_svg = render_mol_svg(mol)
-                    st.image(mol_svg, output_format="SVG", width=400)
-                except Exception as e:
-                    st.error(f"이미지를 그리는 중에 오류가 발생했습니다: {e}")
+                # 서버 환경 충돌을 피하기 위해 외부 화학 구조 이미지 API 활용
+                img_url = f"https://cactus.nci.nih.gov/chemical/structure/{smiles_input}/image"
+                st.image(img_url, caption="분자 구조 이미지", width=350)
 
             with col2:
                 tab1, tab2 = st.tabs(["📊 AI 용해도 예측", "🔬 물리화학적 상세 분석"])
