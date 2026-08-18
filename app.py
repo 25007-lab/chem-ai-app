@@ -4,7 +4,6 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors
-from rdkit.Chem.rdMolDescriptors import CalcNumLipinskiHAcceptors, CalcNumLipinskiHDonors
 
 # 1. 저장해둔 모델 불러오기
 model = joblib.load('solubility_model.pkl')
