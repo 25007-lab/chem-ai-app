@@ -18,7 +18,15 @@ if st.button("예측하기"):
         mol = Chem.MolFromSmiles(smiles_input)
         if mol:
             # 시각화
-            st.image(Chem.Draw.MolToImage(mol), caption="입력하신 분자 구조")
+            from rdkit.Chem.Draw import rdMolDraw2D
+
+            # 최신 RDKit에 맞춘 안정적인 2차원 구조 이미지 생성 코드
+            drawer = rdMolDraw2D.MolDraw2DCairo(300, 300)
+            drawer.DrawMolecule(mol)
+            drawer.FinishDrawing()
+            png_data = drawer.GetDrawingText()
+
+            st.image(png_data, caption="입력하신 분자 구조")
             
             # 예측을 위한 데이터 변환
             fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=1024)
